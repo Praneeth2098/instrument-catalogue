@@ -1,0 +1,33 @@
+# Surgical Training Tool - Python Dependencies
+# Data parsing and processing requirements
+
+# Core Python packages
+python>=3.8
+
+# CSV processing
+pandas>=1.3.0
+
+# JSON handling (built-in, but listed for completeness)
+# json - built-in module
+
+# File system operations (built-in)
+# os - built-in module
+# glob - built-in module
+
+# Regular expressions (built-in)
+# re - built-in module
+
+# Collections (built-in)
+# collections - built-in module
+
+# Data validation (optional but recommended)
+jsonschema>=3.2.0
+
+# Development and testing (optional)
+pytest>=6.0.0
+black>=21.0.0
+flake8>=3.9.0
+
+# Documentation (optional)
+sphinx>=4.0.0
+sphinx-rtd-theme>=0.5.0

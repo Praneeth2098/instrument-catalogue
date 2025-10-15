@@ -1,0 +1,367 @@
+{
+  "dataStructure": {
+    "description": "Complete data structure for surgical training tool backend",
+    "version": "1.0.0",
+    "lastUpdated": "2024-01-15"
+  },
+  "specialties": {
+    "description": "Medical specialties that can be assigned to surgical sets",
+    "availableSpecialties": [
+      "General Surgery",
+      "Orthopedic Surgery", 
+      "Cardiothoracic Surgery",
+      "General Anesthesia",
+      "Neurosurgery",
+      "ENT Surgery",
+      "Thoracic Surgery",
+      "Vascular Surgery",
+      "Plastic Surgery",
+      "Urology",
+      "Gynecology",
+      "Ophthalmology",
+      "Dermatology",
+      "Others"
+    ]
+  },
+  "setStructure": {
+    "description": "Structure for surgical instrument sets",
+    "requiredFields": {
+      "name": {
+        "type": "string",
+        "description": "Name of the surgical set",
+        "example": "Appendisectomy",
+        "validation": "Required, unique, max 100 characters"
+      },
+      "count": {
+        "type": "number", 
+        "description": "Number of instruments in this set",
+        "example": 28,
+        "validation": "Required, integer >= 0"
+      },
+      "structure": {
+        "type": "string",
+        "description": "Data structure type",
+        "enum": ["old", "new"],
+        "example": "new",
+        "validation": "Required, must be 'old' or 'new'"
+      },
+      "hasSpeciality": {
+        "type": "boolean",
+        "description": "Whether this set has specialty information",
+        "example": true,
+        "validation": "Required"
+      },
+      "hasSetDescription": {
+        "type": "boolean", 
+        "description": "Whether this set has a description",
+        "example": true,
+        "validation": "Required"
+      },
+      "filename": {
+        "type": "string",
+        "description": "Original CSV filename",
+        "example": "Instrument Description - Appendisectomy.csv",
+        "validation": "Required, max 200 characters"
+      }
+    },
+    "optionalFields": {
+      "speciality": {
+        "type": "string",
+        "description": "Medical specialty this set belongs to",
+        "example": "General Surgery",
+        "validation": "Must be from availableSpecialties list"
+      },
+      "setDescription": {
+        "type": "string",
+        "description": "Detailed description of what this set is used for",
+        "example": "This instrument set is used for surgically removing a diseased appendix",
+        "validation": "Max 500 characters"
+      }
+    }
+  },
+  "instrumentStructure": {
+    "description": "Structure for individual surgical instruments",
+    "requiredFields": {
+      "name": {
+        "type": "string",
+        "description": "Name of the surgical instrument",
+        "example": "Mosquito Artery Forceps, Curved, 5\"",
+        "validation": "Required, max 200 characters"
+      },
+      "category": {
+        "type": "string",
+        "description": "Category of the instrument",
+        "example": "General",
+        "validation": "Required, max 50 characters"
+      },
+      "sourceFile": {
+        "type": "string",
+        "description": "CSV file this instrument came from",
+        "example": "Instrument Description - Appendisectomy.csv",
+        "validation": "Required, max 200 characters"
+      },
+      "rowNumber": {
+        "type": "number",
+        "description": "Row number in the original CSV",
+        "example": 2,
+        "validation": "Required, integer > 0"
+      },
+      "sets": {
+        "type": "array",
+        "description": "List of surgical sets this instrument belongs to",
+        "example": ["Appendisectomy", "Tracheostomy Set"],
+        "validation": "Required, array of strings"
+      }
+    },
+    "optionalFields": {
+      "brief": {
+        "type": "string",
+        "description": "Brief description of the instrument",
+        "example": "Done",
+        "validation": "Max 100 characters"
+      },
+      "description": {
+        "type": "string",
+        "description": "Detailed description of the instrument",
+        "example": "It is a surgical instrument, a type of ratcheted hemostat...",
+        "validation": "Max 2000 characters"
+      },
+      "type": {
+        "type": "string",
+        "description": "Type of instrument",
+        "example": "Forceps",
+        "validation": "Max 50 characters"
+      },
+      "usage": {
+        "type": "string",
+        "description": "How the instrument is used",
+        "example": "Clamping Blood Vessels: Its primary function is to clamp...",
+        "validation": "Max 1000 characters"
+      },
+      "importantConsiderations": {
+        "type": "string",
+        "description": "Important considerations when using this instrument",
+        "example": "Tissue Damage: As forceps are crushing instruments...",
+        "validation": "Max 1000 characters"
+      },
+      "cleaningSterilization": {
+        "type": "string",
+        "description": "Cleaning and sterilization instructions",
+        "example": "Pre-cleaning: Clean the instrument immediately after use...",
+        "validation": "Max 1000 characters"
+      },
+      "inspectionMaintenance": {
+        "type": "string",
+        "description": "Inspection and maintenance instructions",
+        "example": "Lubrication Frequency: Lubricate the movable parts...",
+        "validation": "Max 1000 characters"
+      },
+      "referenceImages": {
+        "type": "string",
+        "description": "Reference to images of the instrument",
+        "example": "https://example.com/instrument-image.jpg",
+        "validation": "Max 500 characters, valid URL format"
+      },
+      "specialities": {
+        "type": "array",
+        "description": "Medical specialties this instrument is used in",
+        "example": ["Orthopedic Surgery", "General Anesthesia"],
+        "validation": "Array of strings from availableSpecialties"
+      },
+      "setDescriptions": {
+        "type": "array",
+        "description": "Descriptions of sets this instrument belongs to",
+        "example": ["These instruments are used for minor procedures...", "These instruments are used to perform a tracheostomy..."],
+        "validation": "Array of strings, max 500 characters each"
+      },
+      "features": {
+        "type": "array",
+        "description": "Key features of the instrument",
+        "example": ["Self-retaining mechanism", "Ergonomic handle"],
+        "validation": "Array of strings, max 50 characters each"
+      },
+      "material": {
+        "type": "string",
+        "description": "Material the instrument is made from",
+        "example": "Stainless Steel",
+        "validation": "Max 100 characters"
+      },
+      "size": {
+        "type": "string",
+        "description": "Size specifications",
+        "example": "Various",
+        "validation": "Max 100 characters"
+      },
+      "sterilization": {
+        "type": "string",
+        "description": "Sterilization requirements",
+        "example": "Standard sterilization procedures",
+        "validation": "Max 200 characters"
+      },
+      "manufacturer": {
+        "type": "string",
+        "description": "Manufacturer of the instrument",
+        "example": "Various",
+        "validation": "Max 100 characters"
+      },
+      "image": {
+        "type": "string",
+        "description": "URL to instrument image",
+        "example": "https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=Mosquito+Artery+Forceps",
+        "validation": "Valid URL format, max 500 characters"
+      }
+    }
+  },
+  "csvStructure": {
+    "description": "CSV file structure for bulk data import",
+    "newStructure": {
+      "header": "SPECIALITY,SET DISCRIPTION,NAME,CATEGORY,BRIEF,DISCRIPTION ,TYPE,USAGE,IMPORTANT CONSIDERATIONS,CLEANING & STERILIZATION,INSPECTION & MAINTENANCE,REFERENCE IMAGES",
+      "description": "New CSV structure with specialty and set description columns",
+      "requiredColumns": [
+        "SPECIALITY",
+        "SET DISCRIPTION", 
+        "NAME",
+        "CATEGORY"
+      ],
+      "optionalColumns": [
+        "BRIEF",
+        "DISCRIPTION ",
+        "TYPE", 
+        "USAGE",
+        "IMPORTANT CONSIDERATIONS",
+        "CLEANING & STERILIZATION",
+        "INSPECTION & MAINTENANCE",
+        "REFERENCE IMAGES"
+      ]
+    },
+    "oldStructure": {
+      "header": "NAME,CATEGORY,BRIEF,DISCRIPTION ,TYPE,USAGE,IMPORTANT CONSIDERATIONS,CLEANING & STERILIZATION,INSPECTION & MAINTENANCE,REFERENCE IMAGES",
+      "description": "Old CSV structure without specialty and set description columns",
+      "requiredColumns": [
+        "NAME",
+        "CATEGORY"
+      ],
+      "optionalColumns": [
+        "BRIEF",
+        "DISCRIPTION ",
+        "TYPE",
+        "USAGE", 
+        "IMPORTANT CONSIDERATIONS",
+        "CLEANING & STERILIZATION",
+        "INSPECTION & MAINTENANCE",
+        "REFERENCE IMAGES"
+      ]
+    }
+  },
+  "validationRules": {
+    "description": "Validation rules for data integrity",
+    "setValidation": {
+      "name": "Must be unique across all sets",
+      "count": "Must match actual number of instruments in the set",
+      "speciality": "Must be from availableSpecialties list if hasSpeciality is true",
+      "setDescription": "Required if hasSetDescription is true"
+    },
+    "instrumentValidation": {
+      "name": "Must be unique across all instruments",
+      "sets": "Must reference existing set names",
+      "specialities": "Must be from availableSpecialties list",
+      "image": "Must be valid URL if provided"
+    }
+  },
+  "exampleData": {
+    "description": "Example data entries for reference",
+    "exampleSet": {
+      "name": "Cardiac Valve Replacement Set",
+      "count": 25,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true,
+      "speciality": "Cardiothoracic Surgery",
+      "setDescription": "Specialized instruments used for cardiac valve replacement and repair procedures, including both mechanical and biological valve options.",
+      "filename": "Instrument Description - Cardiac Valve Replacement Set.csv"
+    },
+    "exampleInstrument": {
+      "name": "DeBakey Vascular Forceps, 8 inch",
+      "category": "Forceps",
+      "brief": "Delicate vascular forceps for fine tissue handling",
+      "description": "The DeBakey vascular forceps are precision instruments designed for delicate vascular procedures. They feature fine, atraumatic tips that minimize tissue trauma while providing secure grasping of delicate blood vessels and tissues.",
+      "type": "Vascular Forceps",
+      "usage": "Used in cardiovascular surgery for handling delicate blood vessels, suturing, and tissue manipulation. Essential for coronary artery bypass, valve replacement, and other cardiac procedures.",
+      "importantConsiderations": "Handle with extreme care to avoid damaging delicate vascular structures. Use appropriate size for vessel diameter. Avoid excessive pressure that could cause intimal damage.",
+      "cleaningSterilization": "Clean immediately after use with enzymatic cleaner. Rinse thoroughly with distilled water. Autoclave at 270°F (132°C) for 3-4 minutes. Ensure complete drying before storage.",
+      "inspectionMaintenance": "Inspect tips for damage before each use. Check ratchet mechanism for smooth operation. Lubricate moving parts monthly with surgical instrument lubricant. Replace if tips are bent or damaged.",
+      "referenceImages": "https://example.com/debakey-forceps.jpg",
+      "sets": ["Cardiac Valve Replacement Set", "Coronary Bypass Set"],
+      "specialities": ["Cardiothoracic Surgery", "Vascular Surgery"],
+      "setDescriptions": [
+        "Specialized instruments for cardiac valve procedures",
+        "Essential tools for coronary artery bypass surgery"
+      ],
+      "features": ["Atraumatic tips", "Fine serrations", "Ergonomic handles"],
+      "material": "Stainless Steel",
+      "size": "8 inch",
+      "sterilization": "Autoclave compatible",
+      "manufacturer": "Medtronic",
+      "image": "https://via.placeholder.com/300x200/4A90E2/FFFFFF?text=DeBakey+Forceps",
+      "sourceFile": "Instrument Description - Cardiac Valve Replacement Set.csv",
+      "rowNumber": 3
+    }
+  },
+  "apiEndpoints": {
+    "description": "Suggested API endpoints for backend integration",
+    "sets": {
+      "GET /api/sets": "Get all surgical sets",
+      "GET /api/sets/:id": "Get specific set by ID",
+      "POST /api/sets": "Create new surgical set",
+      "PUT /api/sets/:id": "Update existing set",
+      "DELETE /api/sets/:id": "Delete set"
+    },
+    "instruments": {
+      "GET /api/instruments": "Get all instruments",
+      "GET /api/instruments/:id": "Get specific instrument by ID",
+      "GET /api/instruments/set/:setName": "Get instruments by set name",
+      "POST /api/instruments": "Create new instrument",
+      "PUT /api/instruments/:id": "Update existing instrument",
+      "DELETE /api/instruments/:id": "Delete instrument"
+    },
+    "specialties": {
+      "GET /api/specialties": "Get all available specialties",
+      "GET /api/specialties/:name/sets": "Get sets by specialty"
+    },
+    "search": {
+      "GET /api/search?q=:query": "Search instruments and sets",
+      "GET /api/search/instruments?q=:query": "Search only instruments",
+      "GET /api/search/sets?q=:query": "Search only sets"
+    }
+  },
+  "dataImport": {
+    "description": "Guidelines for importing data from CSV files",
+    "csvUpload": {
+      "endpoint": "POST /api/import/csv",
+      "description": "Upload and parse CSV files",
+      "supportedFormats": ["csv"],
+      "maxFileSize": "10MB",
+      "requiredFields": ["NAME", "CATEGORY"],
+      "optionalFields": ["SPECIALITY", "SET DISCRIPTION", "BRIEF", "DISCRIPTION ", "TYPE", "USAGE", "IMPORTANT CONSIDERATIONS", "CLEANING & STERILIZATION", "INSPECTION & MAINTENANCE", "REFERENCE IMAGES"]
+    },
+    "bulkImport": {
+      "endpoint": "POST /api/import/bulk",
+      "description": "Import multiple sets and instruments at once",
+      "format": "JSON",
+      "maxRecords": 1000
+    }
+  },
+  "errorHandling": {
+    "description": "Error codes and messages for API responses",
+    "validationErrors": {
+      "400": "Bad Request - Invalid data format or missing required fields",
+      "422": "Unprocessable Entity - Data validation failed"
+    },
+    "notFoundErrors": {
+      "404": "Not Found - Resource not found"
+    },
+    "serverErrors": {
+      "500": "Internal Server Error - Server processing error"
+    }
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "summary": {
+    "totalInstruments": 345,
+    "uniqueInstruments": 203,
+    "totalSets": 16,
+    "oldStructureFiles": 5,
+    "newStructureFiles": 11
+  },
+  "setInfo": {
+    " Single Instruments": {
+      "filename": "Instrument Description -  Single Instruments.csv",
+      "instrumentCount": 10,
+      "structure": "old",
+      "hasSpeciality": false,
+      "hasSetDescription": false
+    },
+    "Appendisectomy": {
+      "filename": "Instrument Description - Appendisectomy.csv",
+      "instrumentCount": 28,
+      "structure": "old",
+      "hasSpeciality": false,
+      "hasSetDescription": false
+    },
+    "Cardiac - Valve set": {
+      "filename": "Instrument Description - Cardiac - Valve set.csv",
+      "instrumentCount": 19,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Cardiothoracic Basic Tray ": {
+      "filename": "Instrument Description - Cardiothoracic Basic Tray .csv",
+      "instrumentCount": 29,
+      "structure": "new",
+      "hasSpeciality": false,
+      "hasSetDescription": true
+    },
+    "Hand Surgery": {
+      "filename": "Instrument Description - Hand Surgery.csv",
+      "instrumentCount": 34,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Incision & Drainage Set": {
+      "filename": "Instrument Description - Incision & Drainage Set.csv",
+      "instrumentCount": 15,
+      "structure": "old",
+      "hasSpeciality": false,
+      "hasSetDescription": false
+    },
+    "Laparoscopy set": {
+      "filename": "Instrument Description - Laparoscopy set.csv",
+      "instrumentCount": 9,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Lobectomy Set": {
+      "filename": "Instrument Description - Lobectomy Set.csv",
+      "instrumentCount": 34,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Mini laparoscopy ": {
+      "filename": "Instrument Description - Mini laparoscopy .csv",
+      "instrumentCount": 31,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Ortho Basic Set": {
+      "filename": "Instrument Description - Ortho Basic Set.csv",
+      "instrumentCount": 21,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Ortho Minor Set": {
+      "filename": "Instrument Description - Ortho Minor Set.csv",
+      "instrumentCount": 34,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Osteotomy set": {
+      "filename": "Instrument Description - Osteotomy set.csv",
+      "instrumentCount": 11,
+      "structure": "old",
+      "hasSpeciality": false,
+      "hasSetDescription": false
+    },
+    "Spinal Set": {
+      "filename": "Instrument Description - Spinal Set.csv",
+      "instrumentCount": 4,
+      "structure": "old",
+      "hasSpeciality": false,
+      "hasSetDescription": false
+    },
+    "Thoracotomy Set": {
+      "filename": "Instrument Description - Thoracotomy Set.csv",
+      "instrumentCount": 48,
+      "structure": "new",
+      "hasSpeciality": false,
+      "hasSetDescription": false
+    },
+    "Thyroid Retractor Set": {
+      "filename": "Instrument Description - Thyroid Retractor Set.csv",
+      "instrumentCount": 2,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    },
+    "Tracheostomy Set": {
+      "filename": "Instrument Description - Tracheostomy Set.csv",
+      "instrumentCount": 16,
+      "structure": "new",
+      "hasSpeciality": true,
+      "hasSetDescription": true
+    }
+  },
+  "structureInfo": {
+    "Instrument Description -  Single Instruments.csv": "old",
+    "Instrument Description - Appendisectomy.csv": "old",
+    "Instrument Description - Cardiac - Valve set.csv": "new",
+    "Instrument Description - Cardiothoracic Basic Tray .csv": "new",
+    "Instrument Description - Hand Surgery.csv": "new",
+    "Instrument Description - Incision & Drainage Set.csv": "old",
+    "Instrument Description - Laparoscopy set.csv": "new",
+    "Instrument Description - Lobectomy Set.csv": "new",
+    "Instrument Description - Mini laparoscopy .csv": "new",
+    "Instrument Description - Ortho Basic Set.csv": "new",
+    "Instrument Description - Ortho Minor Set.csv": "new",
+    "Instrument Description - Osteotomy set.csv": "old",
+    "Instrument Description - Spinal Set.csv": "old",
+    "Instrument Description - Thoracotomy Set.csv": "new",
+    "Instrument Description - Thyroid Retractor Set.csv": "new",
+    "Instrument Description - Tracheostomy Set.csv": "new"
+  }
+}
