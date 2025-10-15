@@ -373,8 +373,8 @@ export const completeInstrumentsData = {
       "rowNumber": 18,
       "setName": " Single Instruments",
       "sets": [
-        "Thyroid Retractor Set",
-        " Single Instruments"
+        " Single Instruments",
+        "Thyroid Retractor Set"
       ],
       "specialities": [
         "General Surgery"
@@ -430,13 +430,13 @@ export const completeInstrumentsData = {
       "rowNumber": 2,
       "setName": "Appendisectomy",
       "sets": [
-        "Tracheostomy Set",
-        "Mini laparoscopy ",
-        "Thoracotomy Set",
-        "Appendisectomy",
-        "Lobectomy Set",
         "Ortho Minor Set",
-        "Incision & Drainage Set"
+        "Incision & Drainage Set",
+        "Mini laparoscopy ",
+        "Tracheostomy Set",
+        "Appendisectomy",
+        "Thoracotomy Set",
+        "Lobectomy Set"
       ],
       "specialities": [
         "Thoracic Surgery",
@@ -470,13 +470,13 @@ export const completeInstrumentsData = {
       "rowNumber": 3,
       "setName": "Appendisectomy",
       "sets": [
-        "Tracheostomy Set",
-        "Mini laparoscopy ",
-        "Thoracotomy Set",
-        "Appendisectomy",
-        "Lobectomy Set",
         "Ortho Minor Set",
-        "Incision & Drainage Set"
+        "Incision & Drainage Set",
+        "Mini laparoscopy ",
+        "Tracheostomy Set",
+        "Appendisectomy",
+        "Thoracotomy Set",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -502,14 +502,14 @@ export const completeInstrumentsData = {
       "rowNumber": 4,
       "setName": "Appendisectomy",
       "sets": [
-        "Tracheostomy Set",
-        "Mini laparoscopy ",
-        "Thoracotomy Set",
         "Appendisectomy",
-        "Lobectomy Set",
         "Ortho Minor Set",
-        "Laparoscopy set",
-        "Incision & Drainage Set"
+        "Mini laparoscopy ",
+        "Lobectomy Set",
+        "Tracheostomy Set",
+        "Incision & Drainage Set",
+        "Thoracotomy Set",
+        "Laparoscopy set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -535,13 +535,13 @@ export const completeInstrumentsData = {
       "rowNumber": 5,
       "setName": "Appendisectomy",
       "sets": [
+        "Ortho Minor Set",
+        "Incision & Drainage Set",
         "Mini laparoscopy ",
         "Thoracotomy Set",
         "Appendisectomy",
         "Lobectomy Set",
-        "Ortho Minor Set",
-        "Laparoscopy set",
-        "Incision & Drainage Set"
+        "Laparoscopy set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -567,11 +567,11 @@ export const completeInstrumentsData = {
       "rowNumber": 6,
       "setName": "Appendisectomy",
       "sets": [
-        "Tracheostomy Set",
-        "Thoracotomy Set",
-        "Appendisectomy",
         "Ortho Minor Set",
-        "Incision & Drainage Set"
+        "Incision & Drainage Set",
+        "Appendisectomy",
+        "Thoracotomy Set",
+        "Tracheostomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -597,12 +597,12 @@ export const completeInstrumentsData = {
       "rowNumber": 7,
       "setName": "Appendisectomy",
       "sets": [
+        "Ortho Minor Set",
         "Mini laparoscopy ",
         "Thoracotomy Set",
         "Appendisectomy",
-        "Lobectomy Set",
-        "Ortho Minor Set",
         "Cardiothoracic Basic Tray ",
+        "Lobectomy Set",
         "Laparoscopy set"
       ],
       "specialities": [],
@@ -629,9 +629,9 @@ export const completeInstrumentsData = {
       "rowNumber": 8,
       "setName": "Appendisectomy",
       "sets": [
-        "Lobectomy Set",
+        "Appendisectomy",
         "Mini laparoscopy ",
-        "Appendisectomy"
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -683,10 +683,10 @@ export const completeInstrumentsData = {
       "rowNumber": 10,
       "setName": "Appendisectomy",
       "sets": [
-        "Lobectomy Set",
+        "Appendisectomy",
         "Mini laparoscopy ",
         "Thoracotomy Set",
-        "Appendisectomy"
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -712,12 +712,12 @@ export const completeInstrumentsData = {
       "rowNumber": 11,
       "setName": "Appendisectomy",
       "sets": [
-        "Cardiac - Valve set",
+        "Ortho Minor Set",
         "Mini laparoscopy ",
         "Appendisectomy",
-        "Lobectomy Set",
-        "Ortho Minor Set",
-        "Cardiothoracic Basic Tray "
+        "Cardiothoracic Basic Tray ",
+        "Cardiac - Valve set",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -743,10 +743,10 @@ export const completeInstrumentsData = {
       "rowNumber": 12,
       "setName": "Appendisectomy",
       "sets": [
-        "Lobectomy Set",
-        "Cardiac - Valve set",
+        "Appendisectomy",
         "Tracheostomy Set",
-        "Appendisectomy"
+        "Cardiac - Valve set",
+        "Lobectomy Set"
       ],
       "specialities": [
         "Cardiac Surgery"
@@ -776,8 +776,8 @@ export const completeInstrumentsData = {
       "rowNumber": 13,
       "setName": "Appendisectomy",
       "sets": [
-        "Lobectomy Set",
-        "Appendisectomy"
+        "Appendisectomy",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -803,9 +803,9 @@ export const completeInstrumentsData = {
       "rowNumber": 14,
       "setName": "Appendisectomy",
       "sets": [
-        "Hand Surgery",
+        "Appendisectomy",
         "Ortho Minor Set",
-        "Appendisectomy"
+        "Hand Surgery"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -858,9 +858,9 @@ export const completeInstrumentsData = {
       "rowNumber": 16,
       "setName": "Appendisectomy",
       "sets": [
+        "Appendisectomy",
         "Mini laparoscopy ",
-        "Ortho Minor Set",
-        "Appendisectomy"
+        "Ortho Minor Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -886,10 +886,10 @@ export const completeInstrumentsData = {
       "rowNumber": 17,
       "setName": "Appendisectomy",
       "sets": [
-        "Ortho Minor Set",
         "Appendisectomy",
-        "Laparoscopy set",
-        "Incision & Drainage Set"
+        "Incision & Drainage Set",
+        "Ortho Minor Set",
+        "Laparoscopy set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -941,14 +941,14 @@ export const completeInstrumentsData = {
       "rowNumber": 19,
       "setName": "Appendisectomy",
       "sets": [
+        "Appendisectomy",
+        "Ortho Minor Set",
         "Mini laparoscopy ",
         "Thoracotomy Set",
-        "Appendisectomy",
-        "Lobectomy Set",
-        "Ortho Minor Set",
+        "Incision & Drainage Set",
         "Cardiothoracic Basic Tray ",
-        "Laparoscopy set",
-        "Incision & Drainage Set"
+        "Lobectomy Set",
+        "Laparoscopy set"
       ],
       "specialities": [
         "General Surgery"
@@ -1031,10 +1031,10 @@ export const completeInstrumentsData = {
       "rowNumber": 22,
       "setName": "Appendisectomy",
       "sets": [
-        "Mini laparoscopy ",
-        "Ortho Minor Set",
         "Appendisectomy",
-        "Cardiothoracic Basic Tray "
+        "Mini laparoscopy ",
+        "Cardiothoracic Basic Tray ",
+        "Ortho Minor Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1061,14 +1061,14 @@ export const completeInstrumentsData = {
       "setName": "Appendisectomy",
       "sets": [
         "Tracheostomy Set",
-        "Appendisectomy",
-        "Lobectomy Set",
-        "Ortho Minor Set",
         "Laparoscopy set",
+        "Appendisectomy",
         "Incision & Drainage Set",
+        "Cardiothoracic Basic Tray ",
+        "Ortho Minor Set",
         "Mini laparoscopy ",
         "Thoracotomy Set",
-        "Cardiothoracic Basic Tray "
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1094,10 +1094,10 @@ export const completeInstrumentsData = {
       "rowNumber": 24,
       "setName": "Appendisectomy",
       "sets": [
-        "Lobectomy Set",
-        "Mini laparoscopy ",
         "Appendisectomy",
-        "Incision & Drainage Set"
+        "Incision & Drainage Set",
+        "Lobectomy Set",
+        "Mini laparoscopy "
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1123,11 +1123,11 @@ export const completeInstrumentsData = {
       "rowNumber": 25,
       "setName": "Appendisectomy",
       "sets": [
-        "Tracheostomy Set",
+        "Incision & Drainage Set",
         "Mini laparoscopy ",
+        "Tracheostomy Set",
         "Appendisectomy",
-        "Lobectomy Set",
-        "Incision & Drainage Set"
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1153,11 +1153,11 @@ export const completeInstrumentsData = {
       "rowNumber": 26,
       "setName": "Appendisectomy",
       "sets": [
-        "Mini laparoscopy ",
-        "Appendisectomy",
-        "Lobectomy Set",
         "Ortho Minor Set",
-        "Laparoscopy set"
+        "Mini laparoscopy ",
+        "Laparoscopy set",
+        "Appendisectomy",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1183,10 +1183,10 @@ export const completeInstrumentsData = {
       "rowNumber": 27,
       "setName": "Appendisectomy",
       "sets": [
-        "Lobectomy Set",
+        "Appendisectomy",
         "Mini laparoscopy ",
         "Ortho Minor Set",
-        "Appendisectomy"
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1212,13 +1212,13 @@ export const completeInstrumentsData = {
       "rowNumber": 28,
       "setName": "Appendisectomy",
       "sets": [
-        "Mini laparoscopy ",
-        "Thoracotomy Set",
-        "Appendisectomy",
-        "Lobectomy Set",
         "Ortho Minor Set",
+        "Incision & Drainage Set",
+        "Mini laparoscopy ",
+        "Appendisectomy",
         "Cardiothoracic Basic Tray ",
-        "Incision & Drainage Set"
+        "Thoracotomy Set",
+        "Lobectomy Set"
       ],
       "specialities": [
         "General Surgery"
@@ -1508,8 +1508,8 @@ export const completeInstrumentsData = {
       "rowNumber": 16,
       "setName": "Cardiac - Valve set",
       "sets": [
-        "Tracheostomy Set",
-        "Cardiac - Valve set"
+        "Cardiac - Valve set",
+        "Tracheostomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1561,9 +1561,9 @@ export const completeInstrumentsData = {
       "rowNumber": 22,
       "setName": "Cardiac - Valve set",
       "sets": [
-        "Hand Surgery",
         "Thoracotomy Set",
-        "Cardiac - Valve set"
+        "Cardiac - Valve set",
+        "Hand Surgery"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1589,8 +1589,8 @@ export const completeInstrumentsData = {
       "rowNumber": 23,
       "setName": "Cardiac - Valve set",
       "sets": [
-        "Hand Surgery",
-        "Cardiac - Valve set"
+        "Cardiac - Valve set",
+        "Hand Surgery"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1668,8 +1668,8 @@ export const completeInstrumentsData = {
       "rowNumber": 28,
       "setName": "Cardiac - Valve set",
       "sets": [
-        "Cardiac - Valve set",
-        "Thoracotomy Set"
+        "Thoracotomy Set",
+        "Cardiac - Valve set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1802,8 +1802,8 @@ export const completeInstrumentsData = {
       "rowNumber": 14,
       "setName": "Cardiothoracic Basic Tray ",
       "sets": [
-        "Thoracotomy Set",
-        "Cardiothoracic Basic Tray "
+        "Cardiothoracic Basic Tray ",
+        "Thoracotomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1829,12 +1829,12 @@ export const completeInstrumentsData = {
       "rowNumber": 20,
       "setName": "Cardiothoracic Basic Tray ",
       "sets": [
-        "Tracheostomy Set",
+        "Ortho Minor Set",
         "Mini laparoscopy ",
-        "Thoracotomy Set",
-        "Cardiothoracic Basic Tray ",
         "Hand Surgery",
-        "Ortho Minor Set"
+        "Cardiothoracic Basic Tray ",
+        "Thoracotomy Set",
+        "Tracheostomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -1990,9 +1990,9 @@ export const completeInstrumentsData = {
       "rowNumber": 36,
       "setName": "Cardiothoracic Basic Tray ",
       "sets": [
-        "Tracheostomy Set",
+        "Cardiothoracic Basic Tray ",
         "Thoracotomy Set",
-        "Cardiothoracic Basic Tray "
+        "Tracheostomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -2201,8 +2201,8 @@ export const completeInstrumentsData = {
       "rowNumber": 52,
       "setName": "Cardiothoracic Basic Tray ",
       "sets": [
-        "Thoracotomy Set",
-        "Cardiothoracic Basic Tray "
+        "Cardiothoracic Basic Tray ",
+        "Thoracotomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -2701,8 +2701,8 @@ export const completeInstrumentsData = {
       "rowNumber": 28,
       "setName": "Hand Surgery",
       "sets": [
-        "Hand Surgery",
-        "Thoracotomy Set"
+        "Thoracotomy Set",
+        "Hand Surgery"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3144,9 +3144,9 @@ export const completeInstrumentsData = {
       "rowNumber": 13,
       "setName": "Incision & Drainage Set",
       "sets": [
+        "Incision & Drainage Set",
         "Mini laparoscopy ",
-        "Ortho Minor Set",
-        "Incision & Drainage Set"
+        "Ortho Minor Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3172,11 +3172,11 @@ export const completeInstrumentsData = {
       "rowNumber": 14,
       "setName": "Incision & Drainage Set",
       "sets": [
-        "Mini laparoscopy ",
-        "Thoracotomy Set",
-        "Lobectomy Set",
         "Ortho Minor Set",
-        "Incision & Drainage Set"
+        "Mini laparoscopy ",
+        "Incision & Drainage Set",
+        "Thoracotomy Set",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3202,8 +3202,8 @@ export const completeInstrumentsData = {
       "rowNumber": 6,
       "setName": "Laparoscopy set",
       "sets": [
-        "Lobectomy Set",
         "Mini laparoscopy ",
+        "Lobectomy Set",
         "Laparoscopy set"
       ],
       "specialities": [],
@@ -3230,8 +3230,8 @@ export const completeInstrumentsData = {
       "rowNumber": 6,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
-        "Mini laparoscopy "
+        "Mini laparoscopy ",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3283,8 +3283,8 @@ export const completeInstrumentsData = {
       "rowNumber": 8,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
-        "Mini laparoscopy "
+        "Mini laparoscopy ",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3310,10 +3310,10 @@ export const completeInstrumentsData = {
       "rowNumber": 12,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
+        "Ortho Minor Set",
         "Mini laparoscopy ",
         "Thoracotomy Set",
-        "Ortho Minor Set"
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3339,8 +3339,8 @@ export const completeInstrumentsData = {
       "rowNumber": 13,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
-        "Mini laparoscopy "
+        "Mini laparoscopy ",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3418,8 +3418,8 @@ export const completeInstrumentsData = {
       "rowNumber": 21,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
-        "Ortho Minor Set"
+        "Ortho Minor Set",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3549,8 +3549,8 @@ export const completeInstrumentsData = {
       "rowNumber": 29,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
-        "Mini laparoscopy "
+        "Mini laparoscopy ",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3602,8 +3602,8 @@ export const completeInstrumentsData = {
       "rowNumber": 36,
       "setName": "Lobectomy Set",
       "sets": [
-        "Lobectomy Set",
-        "Mini laparoscopy "
+        "Mini laparoscopy ",
+        "Lobectomy Set"
       ],
       "specialities": [],
       "setDescriptions": [],
@@ -3681,8 +3681,8 @@ export const completeInstrumentsData = {
       "rowNumber": 31,
       "setName": "Mini laparoscopy ",
       "sets": [
-        "Mini laparoscopy ",
-        "Ortho Minor Set"
+        "Ortho Minor Set",
+        "Mini laparoscopy "
       ],
       "specialities": [],
       "setDescriptions": [],

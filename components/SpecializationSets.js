@@ -12,20 +12,21 @@ import { Colors, dashboardColors } from '../constants/colors';
 import Fonts from '../constants/fonts';
 import { moderateScale } from 'react-native-size-matters';
 import SearchBar from './SearchBar';
+import UnifiedSearchResults from './UnifiedSearchResults';
+import { useColorContext } from '../contexts/ColorContext';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-const SpecializationSets = ({ specialization, onSetSelect, onBackToSpecializations }) => {
+const SpecializationSets = ({ specialization, onSetSelect, onSetSelectFromSearch, onBackToSpecializations, onInstrumentSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { currentSpecializationColor } = useColorContext();
   
   const handleSetPress = (setData) => {
     onSetSelect(setData);
   };
 
-  // Filter sets based on search query
-  const filteredSets = specialization.sets.filter(set => 
-    set.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Show all sets (search will navigate to search page)
+  const filteredSets = specialization?.sets || [];
 
   const handleSearchChange = (query) => {
     setSearchQuery(query);
@@ -35,52 +36,43 @@ const SpecializationSets = ({ specialization, onSetSelect, onBackToSpecializatio
     setSearchQuery('');
   };
 
+  // Safety check - don't render if no specialization data
+  if (!specialization) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>No specialization data available</Text>
+      </View>
+    );
+  }
+
   const getSetColor = (setName) => {
-    // Color coding based on specialty
-    if (setName.includes('Cardiac') || setName.includes('Cardiothoracic')) {
-      return '#FF6B6B'; // Red for cardiac
-    } else if (setName.includes('Ortho')) {
-      return '#4ECDC4'; // Teal for orthopedic
-    } else if (setName.includes('Laparoscopy')) {
-      return '#45B7D1'; // Blue for laparoscopy
-    } else if (setName.includes('Spinal')) {
-      return '#96CEB4'; // Green for spinal
-    } else if (setName.includes('Hand')) {
-      return '#FFEAA7'; // Yellow for hand surgery
-    } else if (setName.includes('Thyroid')) {
-      return '#DDA0DD'; // Plum for thyroid
-    } else if (setName.includes('Tracheostomy')) {
-      return '#98D8C8'; // Mint for tracheostomy
-    } else if (setName.includes('Thoracotomy')) {
-      return '#F7DC6F'; // Light yellow for thoracotomy
-    } else if (setName.includes('Osteotomy')) {
-      return '#BB8FCE'; // Light purple for osteotomy
-    } else if (setName.includes('Incision')) {
-      return '#85C1E9'; // Light blue for incision
-    } else if (setName.includes('Appendisectomy')) {
-      return '#F8C471'; // Orange for appendisectomy
-    } else if (setName.includes('Lobectomy')) {
-      return '#A8E6CF'; // Light green for lobectomy
-    } else if (setName.includes('General')) {
-      return '#FFB6C1'; // Light pink for general
-    } else {
-      return '#95A5A6'; // Default gray
-    }
+    // Use the current specialization color from context
+    return currentSpecializationColor;
   };
 
   return (
     <View style={styles.container}>
       <SearchBar
-        placeholder="Search sets..."
+        placeholder="Search everything..."
         value={searchQuery}
         onChangeText={handleSearchChange}
         onClear={handleClearSearch}
       />
-      <ScrollView 
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={true}
-      >
+      {searchQuery.trim() !== '' ? (
+        <UnifiedSearchResults
+          searchQuery={searchQuery}
+          onSpecializationSelect={() => {}} // Not needed in sets view
+          onSetSelect={onSetSelect}
+          onSetSelectFromSearch={onSetSelectFromSearch}
+          onInstrumentSelect={onInstrumentSelect}
+          onBackToSearch={() => {}}
+        />
+      ) : (
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={true}
+        >
         <View style={styles.setsGrid}>
           {filteredSets.sort((a, b) => a.name.localeCompare(b.name)).map((setData, index) => (
             <TouchableOpacity
@@ -103,7 +95,8 @@ const SpecializationSets = ({ specialization, onSetSelect, onBackToSpecializatio
             </TouchableOpacity>
           ))}
         </View>
-      </ScrollView>
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -163,6 +156,12 @@ const styles = StyleSheet.create({
     color: '#2C3E50',
     textAlign: 'center',
     opacity: 0.7,
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#E74C3C',
+    textAlign: 'center',
+    marginTop: 20,
   },
 });
 

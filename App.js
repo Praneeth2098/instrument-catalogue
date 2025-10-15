@@ -21,11 +21,13 @@ console.log('App.js - setsOverview length:', setsOverview?.length);
 import { Colors, dashboardColors } from './constants/colors';
 import Fonts from './constants/fonts';
 import { moderateScale } from 'react-native-size-matters';
+import { ColorProvider, useColorContext } from './contexts/ColorContext';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 
-export default function App() {
+const AppContent = () => {
+  const { updateSpecializationColor, getBannerGradientColors } = useColorContext();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [instruments, setInstruments] = useState([]);
   const [filteredInstruments, setFilteredInstruments] = useState([]);
@@ -41,6 +43,7 @@ export default function App() {
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [globalSearchResults, setGlobalSearchResults] = useState([]);
   const [previousView, setPreviousView] = useState(null);
+  const [globalSearchQuery, setGlobalSearchQuery] = useState('');
 
   // Google Sheet ID - Replace this with your actual Google Sheet ID
   const GOOGLE_SHEET_ID = 'YOUR_GOOGLE_SHEET_ID_HERE';
@@ -125,6 +128,94 @@ export default function App() {
     }
   };
 
+  // Global search functionality
+  const performGlobalSearch = (query) => {
+    if (!query || query.trim() === '') {
+      return {
+        specializations: [],
+        sets: [],
+        instruments: []
+      };
+    }
+
+    const searchTerm = query.toLowerCase();
+    
+    // Search specializations
+    const specializations = setsOverview
+      .filter(set => set.speciality && set.speciality.toLowerCase().includes(searchTerm))
+      .reduce((acc, set) => {
+        const spec = set.speciality;
+        if (!acc.find(s => s.name === spec)) {
+          acc.push({
+            name: spec,
+            sets: setsOverview.filter(s => s.speciality === spec),
+            count: setsOverview.filter(s => s.speciality === spec).reduce((sum, s) => sum + s.count, 0),
+            color: getSpecializationColor(spec)
+          });
+        }
+        return acc;
+      }, []);
+
+    // Search sets
+    const sets = setsOverview.filter(set => 
+      set.name.toLowerCase().includes(searchTerm) ||
+      (set.setDescription && set.setDescription.toLowerCase().includes(searchTerm))
+    );
+
+    // Search instruments
+    const instruments = completeInstrumentsData.instruments.filter(instrument => {
+      return (
+        instrument.name.toLowerCase().includes(searchTerm) ||
+        instrument.category.toLowerCase().includes(searchTerm) ||
+        (instrument.description && instrument.description.toLowerCase().includes(searchTerm)) ||
+        (instrument.usage && instrument.usage.toLowerCase().includes(searchTerm)) ||
+        (instrument.features && instrument.features.some(feature => feature.toLowerCase().includes(searchTerm))) ||
+        (instrument.sets && instrument.sets.some(set => set.toLowerCase().includes(searchTerm)))
+      );
+    });
+
+    return { specializations, sets, instruments };
+  };
+
+  const getSpecializationColor = (specialization) => {
+    // Fixed color mapping to ensure consistency
+    const colors = {
+      'Orthopedic Surgery': '#4ECDC4',
+      'General Anesthesia': '#FF6B6B',
+      'General Surgery': '#45B7D1',
+      'Cardiothoracic Surgery': '#96CEB4',
+      'Cardiac Surgery': '#96CEB4', // Same as Cardiothoracic
+      'Neurosurgery': '#F39C12',
+      'ENT Surgery': '#9B59B6',
+      'Thoracic Surgery': '#E67E22',
+      'Others': '#95A5A6'
+    };
+    return colors[specialization] || '#95A5A6';
+  };
+
+  // Removed local getBannerGradientColors - now using context version
+
+  const getDarkerShade = (hexColor) => {
+    // Convert hex to RGB
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Darken by 20%
+    const darkenedR = Math.max(0, Math.floor(r * 0.8));
+    const darkenedG = Math.max(0, Math.floor(g * 0.8));
+    const darkenedB = Math.max(0, Math.floor(b * 0.8));
+    
+    // Convert back to hex
+    const toHex = (n) => {
+      const hex = n.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    };
+    
+    return `#${toHex(darkenedR)}${toHex(darkenedG)}${toHex(darkenedB)}`;
+  };
+
   // Search functionality
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -161,13 +252,24 @@ export default function App() {
     }
   };
 
+  // Navigate to search page with query
+  const handleNavigateToSearch = (query) => {
+    setPreviousView(currentView);
+    setSearchQuery(query);
+    setCurrentView('searchPage');
+    
+    // Perform the search and set results
+    const results = performGlobalSearch(query);
+    setGlobalSearchResults(results.instruments);
+  };
+
 
   const handleShowOverview = () => {
     setCurrentView('overview');
   };
 
   const handleBackToSearch = () => {
-    setCurrentView('search');
+    setCurrentView('searchPage');
     setSelectedSet(null);
   };
 
@@ -187,8 +289,61 @@ export default function App() {
   };
 
   const handleSetSelect = (setData) => {
+    console.log('🎨 handleSetSelect called with setData:', setData);
+    console.log('🎨 setData.hasSpeciality:', setData.hasSpeciality);
+    console.log('🎨 setData.speciality:', setData.speciality);
+    
     setSelectedSet(setData);
     setCurrentView('setDetail');
+    
+    // Update color context based on set's specialization
+    if (setData.hasSpeciality && setData.speciality) {
+      console.log('🎨 Updating color to specialization:', setData.speciality);
+      updateSpecializationColor(setData.speciality);
+    } else {
+      console.log('🎨 Updating color to Others');
+      updateSpecializationColor('Others');
+    }
+  };
+
+  const handleSetSelectFromSearch = (setData) => {
+    // If the set has a speciality, find the specialization and navigate to it
+    if (setData.hasSpeciality && setData.speciality) {
+      // Find the specialization that contains this set
+      const specialization = setsOverview
+        .filter(set => set.speciality === setData.speciality)
+        .reduce((acc, set) => {
+          const spec = set.speciality;
+          if (!acc.find(s => s.name === spec)) {
+            acc.push({
+              name: spec,
+              sets: setsOverview.filter(s => s.speciality === spec),
+              count: setsOverview.filter(s => s.speciality === spec).reduce((sum, s) => sum + s.count, 0),
+              color: getSpecializationColor(spec)
+            });
+          }
+          return acc;
+        }, [])[0];
+      
+      if (specialization) {
+        setSelectedSpecialization(specialization);
+        setCurrentView('specializationSets');
+        updateSpecializationColor(specialization.name);
+        return;
+      }
+    }
+    
+    // If no speciality or specialization not found, go to "Others" specialization
+    const othersSpecialization = {
+      name: 'Others',
+      sets: setsOverview.filter(set => !set.hasSpeciality || !set.speciality),
+      count: setsOverview.filter(set => !set.hasSpeciality || !set.speciality).reduce((sum, s) => sum + s.count, 0),
+      color: '#95A5A6'
+    };
+    
+    setSelectedSpecialization(othersSpecialization);
+    setCurrentView('specializationSets');
+    updateSpecializationColor('Others');
   };
 
   const handleSetSelectFromCard = (setName) => {
@@ -223,15 +378,56 @@ export default function App() {
       if (instrumentSets.length > 0) {
         // Use the first set this instrument belongs to
         const firstSetName = instrumentSets[0];
-        // Filter instruments that belong to this set
-        const setInstruments = completeInstrumentsData.instruments.filter(inst => 
-          inst.sets && inst.sets.includes(firstSetName)
-        );
-        setSelectedSet({ name: firstSetName, count: setInstruments.length });
-        setCurrentSetInstruments(setInstruments);
-        // Find the index of the selected instrument in the set
-        const instrumentIndex = setInstruments.findIndex(inst => inst.name === instrument.name);
-        setCurrentSetIndex(instrumentIndex >= 0 ? instrumentIndex : 0);
+        const setData = setsOverview.find(set => set.name === firstSetName);
+        
+        if (setData) {
+          setSelectedSet(setData);
+          
+          // Set the specialization context based on the set's speciality
+          if (setData.hasSpeciality && setData.speciality) {
+            const specialization = setsOverview
+              .filter(set => set.speciality === setData.speciality)
+              .reduce((acc, set) => {
+                const spec = set.speciality;
+                if (!acc.find(s => s.name === spec)) {
+                  acc.push({
+                    name: spec,
+                    sets: setsOverview.filter(s => s.speciality === spec),
+                    count: setsOverview.filter(s => s.speciality === spec).reduce((sum, s) => sum + s.count, 0),
+                    color: getSpecializationColor(spec)
+                  });
+                }
+                return acc;
+              }, [])[0];
+            
+            if (specialization) {
+              setSelectedSpecialization(specialization);
+            }
+          } else {
+            // Set belongs to "Others" specialization
+            const othersSpecialization = {
+              name: 'Others',
+              sets: setsOverview.filter(set => !set.hasSpeciality || !set.speciality),
+              count: setsOverview.filter(set => !set.hasSpeciality || !set.speciality).reduce((sum, s) => sum + s.count, 0),
+              color: '#95A5A6'
+            };
+            setSelectedSpecialization(othersSpecialization);
+          }
+          
+          // Filter instruments that belong to this set
+          const setInstruments = completeInstrumentsData.instruments.filter(inst => 
+            inst.sets && inst.sets.includes(firstSetName)
+          );
+          setCurrentSetInstruments(setInstruments);
+          // Find the index of the selected instrument in the set
+          const instrumentIndex = setInstruments.findIndex(inst => inst.name === instrument.name);
+          setCurrentSetIndex(instrumentIndex >= 0 ? instrumentIndex : 0);
+        } else {
+          // Fallback: just show the single instrument
+          setCurrentSetInstruments([instrument]);
+          setCurrentSetIndex(0);
+          setSelectedSet({ name: 'Single Instrument', count: 1 });
+        }
       } else {
         // Fallback: just show the single instrument
         setCurrentSetInstruments([instrument]);
@@ -307,13 +503,13 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <LinearGradient
-          colors={['#0090D6', '#375DF9']}
+          colors={currentView === 'specializations' ? getBannerGradientColors(true) : getBannerGradientColors()}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={styles.fullScreenGradient}
         >
           <SafeAreaView style={styles.container} edges={['top']}>
-            <StatusBar barStyle="light-content" backgroundColor="#0090D6" />
+            <StatusBar barStyle="light-content" backgroundColor={currentView === 'specializations' ? getBannerGradientColors(true)[0] : getBannerGradientColors()[0]} />
             
             {/* Top Banner */}
             <View style={styles.topBanner}>
@@ -377,12 +573,17 @@ export default function App() {
               <SpecializationsOverview 
                 onSpecializationSelect={handleSpecializationSelect}
                 onBackToSearch={handleBackToSearch}
+                onSetSelect={handleSetSelect}
+                onSetSelectFromSearch={handleSetSelectFromSearch}
+                onInstrumentSelect={handleInstrumentSelect}
               />
             ) : currentView === 'specializationSets' ? (
               <SpecializationSets
                 specialization={selectedSpecialization}
                 onSetSelect={handleSetSelect}
+                onSetSelectFromSearch={handleSetSelectFromSearch}
                 onBackToSpecializations={handleBackToSpecializations}
+                onInstrumentSelect={handleInstrumentSelect}
               />
             ) : currentView === 'overview' ? (
               <SetsOverview 
@@ -394,6 +595,9 @@ export default function App() {
                 setData={selectedSet}
                 onInstrumentSelect={handleInstrumentSelect}
                 onBackToOverview={handleBackToOverview}
+                onSetSelect={handleSetSelect}
+                onSetSelectFromSearch={handleSetSelectFromSearch}
+                specializationColor={selectedSpecialization?.color}
               />
             ) : currentView === 'card' ? (
               <View style={styles.cardContainer}>
@@ -809,4 +1013,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+// Main App component with ColorProvider
+export default function App() {
+  return (
+    <ColorProvider>
+      <AppContent />
+    </ColorProvider>
+  );
+}
 

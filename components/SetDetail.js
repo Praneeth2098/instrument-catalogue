@@ -14,12 +14,18 @@ import { Colors, dashboardColors } from '../constants/colors';
 import Fonts from '../constants/fonts';
 import { moderateScale } from 'react-native-size-matters';
 import SearchBar from './SearchBar';
+import UnifiedSearchResults from './UnifiedSearchResults';
+import { useColorContext } from '../contexts/ColorContext';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-const SetDetail = ({ setData, onInstrumentSelect, onBackToOverview }) => {
+const SetDetail = ({ setData, onInstrumentSelect, onBackToOverview, onSetSelect, onSetSelectFromSearch, specializationColor }) => {
   const [expandedGroups, setExpandedGroups] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
+  const { currentSpecializationColor, getDarkerShade } = useColorContext();
+  
+  console.log('🎨 SetDetail: currentSpecializationColor from context:', currentSpecializationColor);
+  console.log('🎨 SetDetail: setData:', setData);
   
   // Get the actual instruments for this set from the complete data
   // Filter instruments that belong to this set
@@ -199,12 +205,8 @@ const SetDetail = ({ setData, onInstrumentSelect, onBackToOverview }) => {
     return 'Other';
   };
 
-  // Filter instruments based on search query
-  const filteredInstruments = instruments && Array.isArray(instruments) ? 
-    instruments.filter(instrument => 
-      instrument.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (instrument.category && instrument.category.toLowerCase().includes(searchQuery.toLowerCase()))
-    ) : [];
+  // Show all instruments (search will navigate to search page)
+  const filteredInstruments = instruments || [];
 
   // Group instruments by type
   const groupedInstruments = filteredInstruments.reduce((groups, instrument) => {
@@ -249,16 +251,26 @@ const SetDetail = ({ setData, onInstrumentSelect, onBackToOverview }) => {
   return (
     <View style={styles.container}>
       <SearchBar
-        placeholder="Search instruments..."
+        placeholder="Search everything..."
         value={searchQuery}
         onChangeText={handleSearchChange}
         onClear={handleClearSearch}
       />
-      <ScrollView 
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={true}
-      >
+      {searchQuery.trim() !== '' ? (
+        <UnifiedSearchResults
+          searchQuery={searchQuery}
+          onSpecializationSelect={() => {}} // Not needed in instruments view
+          onSetSelect={onSetSelect}
+          onSetSelectFromSearch={onSetSelectFromSearch}
+          onInstrumentSelect={onInstrumentSelect}
+          onBackToSearch={() => {}}
+        />
+      ) : (
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={true}
+        >
         {/* Set Description */}
         {setDescription && (
           <Text style={styles.setDescriptionText}>{setDescription}</Text>
@@ -267,7 +279,7 @@ const SetDetail = ({ setData, onInstrumentSelect, onBackToOverview }) => {
         {sortedGroups.map((groupName) => (
           <View key={groupName} style={styles.groupContainer}>
             <TouchableOpacity
-              style={styles.groupHeader}
+              style={[styles.groupHeader, { backgroundColor: getDarkerShade(currentSpecializationColor) }]}
               onPress={() => toggleGroup(groupName)}
               activeOpacity={0.7}
             >
@@ -312,7 +324,8 @@ const SetDetail = ({ setData, onInstrumentSelect, onBackToOverview }) => {
             <Text style={styles.emptySubtext}>The CSV file may be empty or corrupted</Text>
           </View>
         )}
-      </ScrollView>
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -346,7 +359,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: moderateScale(15),
-    backgroundColor: dashboardColors.dashboardCardBlue,
     borderRadius: moderateScale(8),
   },
   groupTitle: {

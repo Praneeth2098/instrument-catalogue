@@ -14,10 +14,11 @@ import { Colors, dashboardColors } from '../constants/colors';
 import Fonts from '../constants/fonts';
 import { moderateScale } from 'react-native-size-matters';
 import SearchBar from './SearchBar';
+import UnifiedSearchResults from './UnifiedSearchResults';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-const SpecializationsOverview = ({ onSpecializationSelect, onBackToSearch }) => {
+const SpecializationsOverview = ({ onSpecializationSelect, onBackToSearch, onSetSelect, onSetSelectFromSearch, onInstrumentSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
   
   // Group sets by specialization
@@ -66,13 +67,16 @@ const SpecializationsOverview = ({ onSpecializationSelect, onBackToSearch }) => 
   };
 
   const getSpecializationColor = (specialization) => {
+    // Fixed color mapping to ensure consistency
     const colors = {
       'Orthopedic Surgery': '#4ECDC4', // Teal
       'General Anesthesia': '#FF6B6B', // Red
       'General Surgery': '#45B7D1', // Blue
       'Cardiothoracic Surgery': '#96CEB4', // Green
+      'Cardiac Surgery': '#96CEB4', // Same as Cardiothoracic
       'Neurosurgery': '#F39C12', // Orange
       'ENT Surgery': '#9B59B6', // Purple
+      'Thoracic Surgery': '#E67E22', // Dark Orange
       'Others': '#95A5A6' // Gray
     };
     return colors[specialization] || '#95A5A6';
@@ -80,10 +84,8 @@ const SpecializationsOverview = ({ onSpecializationSelect, onBackToSearch }) => 
 
   const allSpecializations = getSpecializations();
   
-  // Filter specializations based on search query
-  const filteredSpecializations = allSpecializations.filter(specialization => 
-    specialization.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Show all specializations (search will navigate to search page)
+  const filteredSpecializations = allSpecializations;
   
   // Debug logging
   console.log('🔍 SpecializationsOverview - setsOverview length:', setsOverview.length);
@@ -106,16 +108,33 @@ const SpecializationsOverview = ({ onSpecializationSelect, onBackToSearch }) => 
   return (
     <View style={styles.container}>
       <SearchBar
-        placeholder="Search specializations..."
+        placeholder="Search everything..."
         value={searchQuery}
         onChangeText={handleSearchChange}
         onClear={handleClearSearch}
       />
-      <ScrollView 
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={true}
-      >
+      {searchQuery.trim() !== '' ? (
+        <View style={styles.searchResultsContainer}>
+          <View style={styles.searchHeader}>
+            <Text style={styles.searchResultsTitle}>
+              Search Results for "{searchQuery}"
+            </Text>
+          </View>
+          <UnifiedSearchResults
+            searchQuery={searchQuery}
+            onSpecializationSelect={onSpecializationSelect}
+            onSetSelect={onSetSelect}
+            onSetSelectFromSearch={onSetSelectFromSearch}
+            onInstrumentSelect={onInstrumentSelect}
+            onBackToSearch={onBackToSearch}
+          />
+        </View>
+      ) : (
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={true}
+        >
         <View style={styles.specializationsGrid}>
           {filteredSpecializations.map((specialization, index) => (
             <TouchableOpacity
@@ -138,7 +157,8 @@ const SpecializationsOverview = ({ onSpecializationSelect, onBackToSearch }) => 
             </TouchableOpacity>
           ))}
         </View>
-      </ScrollView>
+        </ScrollView>
+      )}
     </View>
   );
 };
@@ -198,6 +218,21 @@ const styles = StyleSheet.create({
     color: '#2C3E50',
     textAlign: 'center',
     opacity: 0.7,
+  },
+  searchResultsContainer: {
+    flex: 1,
+  },
+  searchHeader: {
+    backgroundColor: '#F5F5F5',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  searchResultsTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#2C3E50',
   },
 });
 

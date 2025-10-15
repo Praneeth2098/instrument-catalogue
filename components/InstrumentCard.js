@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import SetBadges from './SetBadges';
 
 const InstrumentCard = ({ 
   instrument, 
@@ -145,6 +146,12 @@ const InstrumentCard = ({
           showsVerticalScrollIndicator={true}
           bounces={true}
         >
+        {/* Header Section - Name and Category above image */}
+        <View style={styles.headerSection}>
+          <Text style={styles.instrumentName}>{instrument.name}</Text>
+          <Text style={styles.categoryText}>{instrument.category}</Text>
+        </View>
+
         {/* Image Section */}
         <View style={[styles.imageContainer, { height: imageHeight }]}>
           <Image
@@ -152,32 +159,21 @@ const InstrumentCard = ({
             style={styles.image}
             resizeMode="cover"
           />
-          <View style={styles.imageOverlay}>
-            <Text style={styles.instrumentName}>{instrument.name}</Text>
-          </View>
         </View>
 
         {/* Content Section */}
         <View style={styles.contentContainer}>
-            {/* Category Badge */}
-            <View style={styles.categoryContainer}>
-              <Text style={styles.categoryText}>{instrument.category}</Text>
-            </View>
 
             {/* Sets Badges */}
             {instrument.sets && instrument.sets.length > 0 && (
-              <View style={styles.setsContainer}>
-                {instrument.sets.map((set, index) => (
-                  <TouchableOpacity 
-                    key={index} 
-                    style={styles.setBadge}
-                    onPress={() => onSetSelect && onSetSelect(set)}
-                    activeOpacity={0.7}
-                  >
-                    <Text style={styles.setText}>{set}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              <SetBadges
+                sets={instrument.sets}
+                onSetSelect={onSetSelect}
+                maxDisplay={3}
+                showLabel={true}
+                labelText="Found in:"
+                style={styles.setsContainer}
+              />
             )}
 
             {/* Brief Description */}
@@ -275,6 +271,12 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
   },
+  headerSection: {
+    backgroundColor: '#FFFFFF',
+    padding: 20,
+    paddingBottom: 10,
+    alignItems: 'center',
+  },
   imageContainer: {
     position: 'relative',
     backgroundColor: '#F0F0F0',
@@ -283,57 +285,26 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  imageOverlay: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(0, 144, 214, 0.6)', // More transparent light blue
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
   instrumentName: {
-    color: '#FFFFFF',
-    fontSize: 20, // Match banner title size
+    color: '#2C3E50',
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 10,
   },
   contentContainer: {
     backgroundColor: '#FFFFFF',
     padding: 20,
     paddingBottom: 80, // Extra padding to account for instruction overlay
   },
-  categoryContainer: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#2E86AB',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 15,
-    marginBottom: 16,
-  },
   categoryText: {
-    color: '#FFFFFF',
-    fontSize: 12,
+    color: '#2E86AB',
+    fontSize: 14,
     fontWeight: '600',
-    textTransform: 'uppercase',
+    textAlign: 'center',
   },
   setsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     marginBottom: 16,
-    gap: 8,
-  },
-  setBadge: {
-    backgroundColor: '#3498DB', // Blue color for sets
-    borderRadius: 12,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-  },
-  setText: {
-    color: '#FFFFFF',
-    fontSize: 11,
-    fontWeight: '500',
-    textTransform: 'uppercase',
   },
   sectionContainer: {
     marginBottom: 20,
