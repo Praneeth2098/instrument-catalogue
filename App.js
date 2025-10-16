@@ -276,6 +276,8 @@ const AppContent = () => {
   const handleSpecializationSelect = (specialization) => {
     setSelectedSpecialization(specialization);
     setCurrentView('specializationSets');
+    // Update color context immediately to prevent temporary wrong color display
+    updateSpecializationColor(specialization.name);
   };
 
   const handleBackToSpecializations = () => {
